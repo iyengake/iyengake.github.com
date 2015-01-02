@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>How they tried to fool tryerlang.org &#8211; Keerthi Iyengar</title>
+<meta name="description" content="Infrastructure, DevOps, BigData, Hadoop.">
+<meta name="keywords" content="">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://iyengake.github.io/images/bg_02.jpg">
+
+<meta name="twitter:title" content="How they tried to fool tryerlang.org">
+<meta name="twitter:description" content="Infrastructure, DevOps, BigData, Hadoop.">
+<meta name="twitter:creator" content="@keerthiiyengar2">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How they tried to fool tryerlang.org">
+<meta property="og:description" content="Infrastructure, DevOps, BigData, Hadoop.">
+<meta property="og:url" content="http://iyengake.github.io/erlang/how-they-tried-to-fool-tryerlang-org">
+<meta property="og:site_name" content="Keerthi Iyengar">
+<meta property="og:image" content="http://iyengake.github.io/images/bg_02.jpg">
+
+
+
+
+
+<link rel="canonical" href="http://iyengake.github.io/erlang/how-they-tried-to-fool-tryerlang-org">
+<link href="http://iyengake.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Keerthi Iyengar Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="stylesheet" type="text/css" href="http://iyengake.github.io/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="http://iyengake.github.io/assets/css/style.css" />
+
+<div class="search-wrapper">
+    <div class="search-form">
+        <input type="text" class="search-field" placeholder="Search...">
+        <i class="icon-remove-sign"></i>
+        <ul class="search-results post-list"></ul><!-- /.search-results -->
+    </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://iyengake.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://iyengake.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://iyengake.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://iyengake.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://iyengake.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://iyengake.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+<body class="post-template" itemscope itemtype="http://schema.org/WebPage">  
+<header id="masthead" class="blog-background overlay align-center align-middle animated from-bottom"  style="background-image: url(http://iyengake.github.io/images/bg_02.jpg)" itemscope itemtype="http://schema.org/Organization">
+
+
+    <div class="inner">
+        <div class="container">
+            <a class="brand" href="http://iyengake.github.io" role="banner" itemprop="url">
+                
+                    <img itemprop="logo" src="http://iyengake.github.io/images/omikron.png" alt="Keerthi Iyengar Logo" />
+
+            <h1 class="blog-title light" itemprop="name">
+                Keerthi Iyengar
+            </h1>
+                
+            </a>
+        </div>
+    </div>
+    
+    
+    <div class="decor-wrapper">
+        <svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+            <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+
+            <path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+            <path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+
+            <path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+            <path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+
+            <path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+
+            <path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+
+        </svg>
+    </div>
+    
+</header>
+<div id="main" class="content" role="main" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/Blog">
+    <div class="container">
+        <div class="row">
+            <article class="post col-md-8 col-md-offset-2 hentry" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+            
+            
+            
+                
+            
+             
+             
+                    <header class="post-header entry-header">
+                        
+                        <h1 class="post-title text-center hyper lighter bordered-bottom entry-title" itemprop="headline">How they tried to fool tryerlang.org</h1>
+                        
+                        <div class="post-info text-center small">
+                            <span class="entry-date date published"><time datetime="2010-10-14T00:00:00-04:00" class="post-time" itemprop="datePublished">14 Oct 2010</time><span>
+                            in <span class="post-tags"><a href="http://iyengake.github.io/categories/index.html#erlang" data-toggle="tooltip" title="Other posts from the Erlang category" rel="tag">Erlang</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;5 minutes read</span>
+                        </div>
+                    </header>
+                    <div class="post-body bordered-bottom" itemprop="description">
+                        
+                        <h2>Preface</h2>
+
+<p><a title="tryerlang.org" href="http://tryerlang.org" target="_blank">tryerlang.org</a> is an <em>interactive Erlang Shell</em> which allows users to try the power of Erlang directly in a browser, without requiring them to install an Erlang runtime system on their machine. Even if intended for Erlang newbies, tryerlang.org has been subjected to a countless number of attacks conducted by Erlang experts who wanted to circumvent its sandboxing mechanism and to bring down the Erlang node running the application. I must admit that going through the tryerlang.org’s logs is being an highly interesting and constructive experience.</p>
+
+<p>In this blog post I will present one of the most elaborated attacks performed on tryerlang.org. The attack, which exploits the Erlang <em>External Term Representation</em>, has been performed by a former <a href="http://www.erlang-solutions.com" target="_blank">Erlang Solutions</a>’ employee who had access to the tryerlang.org source code. To understand how the attack works, we need to introduce the Erlang <em>External Term Representation</em>.</p>
+
+<h2>External Term Representation</h2>
+
+<p>In Distributed Erlang, terms can be transferred from an Erlang node to another one using the so-called <em>binary</em> format. Generic terms are encoded in binary from the sender using the built-in function <code>term_to_binary/1</code> and restored from the receiver using the complementary function <code>binary_to_term/2</code>. A binary message looks like this:</p>
+
+<pre>
+&lt;&lt;131,100,0,6,112,105,103,101,111,110&gt;&gt;
+</pre>
+
+<p>Which, as you can see, represents the binary encoding of the atom <code>pigeon</code>.</p>
+
+<pre>
+1&gt; term_to_binary(pigeon).
+&lt;&lt;131,100,0,6,112,105,103,101,111,110&gt;&gt;
+2&gt; binary_to_term(&lt;&lt;131,100,0,6,112,105,103,101,111,110&gt;&gt;).
+pigeon
+</pre>
+
+<p>The <em>External Term Representation</em> of Erlang terms is extensively documented in <a title="Erlang External Term Representation" href="http://www.erlang.org/doc/apps/erts/erl_ext_dist.html" target="_blank">the official Erlang Documentation</a>. Let’s see how the attacker used this concept in his own interest.</p>
+
+<h2>Halting the Erlang Node</h2>
+
+<p>To stop the Erlang node running tryerlang.org, the attacker tries at first the following command:</p>
+
+<pre>
+&gt; erlang:halt().
+</pre>
+
+<p>This function, documented <a title="Erlang Halt" href="http://www.erlang.org/doc/man/erlang.html#halt-0" target="_blank">here</a>, is supposed to <em>halt</em> an Erlang runtime system, indicating a normal exit to the calling environment. The function has been disabled in tryerlang.org for security reasons, so the only result the user get is the following annoying message:</p>
+
+<pre>
+"This functionality has been disabled for security reasons in tryerlang.org.".
+</pre>
+
+<p>So, the Erlang node is still up and attacker prepares himself a good cup of Swedish coffee. After a couple of minutes playing with the tryerlang.org shell, the attcker notices that tryerlang.org allows you to define custom <a title="Erlang Funs" href="http://www.erlang.org/doc/programming_examples/funs.html" target="_blank">funs</a>. Then, the intuition. A <em>fun</em>, as any other Erlang term, <a title="export_ext" href="http://www.erlang.org/doc/apps/erts/erl_ext_dist.html#id83276" target="_blank">can be encoded using the External Terms Representation</a>. The encoded fun could then be executed. This could hopefully fool the sandboxing mechanism protecting the tryerlang.org and could open a world of possibilities to the attacker.</p>
+
+<p>According to the documentation, the external representation of the fun (in the <code>fun M:F/A</code> format) is the following:</p>
+
+<pre>
+113 | Module | Function | Arity
+</pre>
+
+<p>Where <code>Module</code> and <code>Function</code> are atoms and <code>Arity</code> is an integer.</p>
+
+<p>Atoms themselves can be encoded using the <a title="atom ext" href="http://www.erlang.org/doc/apps/erts/erl_ext_dist.html#ATOM_EXT" target="_blank">ATOM_EXT</a> format:</p>
+
+<pre>
+100 | Len | AtomName
+</pre>
+
+<p>Where <code>Len</code> is the length of <code>AtomName</code>, expressed using two bytes.</p>
+
+<p>For the atom <code>erlang</code>, which is composed of 6 characters (the letters <code>e</code>, <code>r</code>, <code>l</code>, <code>a</code>, <code>n</code> and <code>g</code>) we obtain:</p>
+
+<pre>
+100 | 0, 6 | 101, 114, 108, 97, 110, 103
+</pre>
+
+<p>Where the integers in the third section are the ASCII codes for each of the letters composing the word “erlang”.</p>
+
+<p>Applying the same reasoning to the atom <code>halt</code>, we obtain:</p>
+
+<pre>
+100 | 0, 4 | 104, 97, 108, 116
+</pre>
+
+<p>Finally, the arity (an integer) can be encoded using the <a title="small integer ext" href="http://www.erlang.org/doc/apps/erts/erl_ext_dist.html#id80902" target="_blank">SMALL_INTEGER_EXT</a> format:</p>
+
+<pre>
+97 | Int
+</pre>
+
+<p>So, in our case (arity = 0) we obtain:</p>
+
+<pre>
+97 | 0
+</pre>
+
+<p>Putting all the pieces together and considering that, in the External Term Representation, the byte <code>131</code> needs to be prepended to the final term, we can encode the <code>erlang:halt/</code>0 function into binary, obtaining:</p>
+
+<pre>
+&lt;&lt;131,113,100,0,6,101,114,108,97,110,103,100,0,4,104,97,108,116,97,0&gt;&gt;
+</pre>
+
+<p>Let’s verify that we didn’t do any mistake:</p>
+
+<pre>
+&gt; binary_to_term(&lt;&lt;131,113,100,0,6,101,114,108,97,110,103,100,0,4,104,97,108,116,97,0&gt;&gt;).
+&gt; #Fun&lt;erlang.halt.0&gt;
+</pre>
+
+<p>Since tryerlang.org doesn’t support copy-and-paste from the clipboard, we need to insert the sequence above by hand.</p>
+
+<p>We can bind the binary to a new variable:</p>
+<pre>
+&gt; B = &lt;&lt;131,113,100,0,6,101,114,108,97,110,103,100,0,4,104,97,108,116,97,0&gt;&gt;.
+</pre>
+
+<p>We now need to convert the binary into an Erlang term. Originally, tryerlang.org was allowing <a title="Erlang Safe Binary To Term" href="http://www.erlang.org/doc/man/erlang.html#binary_to_term-2" target="_blank">the binary_to_term function in safe mode</a>. This function has been now completely disabled after this attack. If you want to try what follows you will need to do it in your own Erlang shell.</p>
+
+<pre>
+&gt; F = binary_to_term(B, [safe]).
+</pre>
+
+<p>Let’s now try to launch the fun as:</p>
+
+<pre>
+&gt;F().
+</pre>
+
+<p>Well, that didn’t work as expected. tryerlang.org actually realized that the <code>erlang:halt/0</code> function was going to be called and the sandboxing mechanism managed to block the execution of the command. We need to do something slightly different. For example, we might pass the newly defined fun as an argument (after all, Erlang is a functional language) to a function who would take care of executing it. As an example, we could use the library function <code>lists:map/2</code>. There’s only a little tiny problem with that. The <code>list:map/2</code> function, in fact, requires that the fun passed as an argument receives <em>exactly one argument</em>. This is not the case of the <code>erlang:halt/0</code> function, which has arity equal to zero. Fortunately <a href="http://www.erlang.org/doc/man/erlang.html#halt-1" target="_blank">an alternative version of <code>erlang:halt/0</code> exists, taking exactly one argument</a>. The external representation for the new function differs from the previous one by only the very last byte. Let’s <em>forget</em> the old value of the variable <code>B</code> and let’s bind it to the new binary:</p>
+
+<pre>
+&gt; f(B).
+&gt; B = &lt;&lt;131,113,100,0,6,101,114,108,97,110,103,100,0,4,104,97,108,116,97,1&gt;&gt;.
+</pre>
+
+<p>We can now pass the new fun as an argument to the <code>lists:map</code> function:</p>
+
+<pre>
+&gt; f(F).
+&gt; F = binary_to_term(B, [safe]).
+&gt;lists:map(F, [0]).
+</pre>
+
+<p>And the node dies. Well, in reality the node is almost immediately brought back by <a title="Erlang Heart" href="http://www.erlang.org/doc/man/heart.html" target="_blank">heart</a> which is listening for heartbeats from the Erlang node itself but, hey, I have to pay a beer to this guy! :)</p>
+
+<p>I wanted to share this experience with all of you. I consider it highly constructive, since it leads to reflect on several aspects of Erlang. Comments and feedback are more than welcome.</p>
+
+                        <br>
+                    <span class="entry-tags">
+                    <p>
+                        <i class="icon-tags"></i>&nbsp;Tagged with 
+                    </p>
+                    </span>
+                    </div>
+        </div>
+                    <footer class="post-footer entry-meta">
+                        <div class="post-share text-center">
+    <p class="light small">
+        Share this post
+    </p>
+    <ul class="social-mini">
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=&quot;How they tried to fool tryerlang.org&quot;%20http://iyengake.github.io/erlang/how-they-tried-to-fool-tryerlang-org%20via%20&#64;keerthiiyengar2"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" data-toggle="tooltip" title="Share on Twitter" itemprop="Twitter">
+                <i class="icon-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a  href="https://www.facebook.com/sharer/sharer.php?u=http://iyengake.github.io/erlang/how-they-tried-to-fool-tryerlang-org"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" data-toggle="tooltip" title="Share on Facebook" itemprop="Facebook">
+                <i class="icon-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://plus.google.com/share?url=http://iyengake.github.io/erlang/how-they-tried-to-fool-tryerlang-org"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" data-toggle="tooltip" title="Share on Google plus" itemprop="GooglePlus">
+                <i class="icon-google-plus"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+                        <div class="post-author text-center">                       
+	        <img src="http://iyengake.github.io/images/roberto-aloi.png" alt="Keerthi Iyengar's photo" itemprop="image" class="post-avatar img-circle img-responsive"/>    
+	    <h4 class="bordered-bottom vcard author" itemprop="author" itemscope itemtype="http://schema.org/Person">By <span itemprop="name" class="fn"><a href="http://iyengake.github.io/about" title="About Keerthi Iyengar" itemprop="url">Keerthi Iyengar</a></span></h4>
+	    <p>Keerthi Iyengar...</p>
+</div> 
+                        <div id="disqus_thread"></div><!-- /#disqus_thread -->
+                    </footer>
+            </article>
+    </div>
+</div>
+
+<footer id="footer"  class="blog-background overlay text-center align-middle animated from-top" style="background-image: url(http://iyengake.github.io/images/bg_02.jpg)" >
+
+
+    <div class="inner">
+        <div class="container">
+
+            <ul class="social-icons">
+            
+            <li>
+                <a href="http://twitter.com/keerthiiyengar2" data-toggle="tooltip" title="Keerthi Iyengar on Twitter" target="_blank">
+                    <i class="icon-twitter"></i>
+                </a>
+            </li>
+            
+            
+            
+            
+            
+            <li>
+                <a href="http://github.com/iyengake" data-toggle="tooltip" title="Keerthi Iyengar on Github" target="_blank">
+                    <i class="icon-github"></i>
+                </a>
+            </li>
+        </ul>
+            <p class="copy-text">
+                <a href="http://iyengake.github.io/about/">Keerthi Iyengar</a> &copy; 2015 &bull; All rights reserved.
+            </p>
+            <p class="copy-text">
+                Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <i class="icon-heart"></i> <a href="http://alum.mit.edu/www/hmfaysal/">HMFAYSAL OMEGA</a> theme.
+            </p>
+            <ul class="menu-items">
+            
+            <li>
+                
+                    <a href="http://iyengake.github.io/"><i class="icon-home"></i></a>&nbsp;&bull;
+                 
+            </li>
+            
+            <li>
+                
+                    <a href="http://iyengake.github.io/categories">Categories</a>&nbsp;&bull;
+                 
+            </li>
+            
+            <li><a href="http://iyengake.github.io/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+            &nbsp;&bull;<li class="dosearch"><i class="icon-search"></i> Search</li>
+        </ul>
+        </div>
+    </div>
+    
+        <div class="decor-wrapper">
+            <svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+
+                <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+                <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+
+                <path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+                <path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+
+                <path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+                <path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+
+                <path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+
+                <path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+
+            </svg>
+        </div>
+    
+</footer>
+
+    
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://iyengake.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://iyengake.github.io/assets/js/scripts.min.js"></script>
+    <script type="text/javascript" src="http://iyengake.github.io/assets/js/waypoints.min.js"></script>
+    <script type="text/javascript" src="http://iyengake.github.io/assets/js/script.js"></script>
+
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').simpleJekyllSearch({
+          jsonFile : 'http://iyengake.github.io/search.json',
+          searchResults : '.search-results',
+          template : '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+    
+     var bs = {
+          close: $(".icon-remove-sign"),
+          searchform: $(".search-form"),
+          canvas: $("body"),
+          dothis: $('.dosearch')
+      };
+    
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('search-overlay');
+    });
+    
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('search-overlay');
+    });
+  })( jQuery, window );
+</script>
+
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'iyengake'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> 
+</body>
+</html>
